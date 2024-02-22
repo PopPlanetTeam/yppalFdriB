@@ -16,7 +16,7 @@ func change_aperture():
 	$CollisionShape2D2.position.y = -(offset + aperture / 2)
 
 func _on_body_entered(body):
-	hit.emit()
+	scored.emit()
 
 func _on_score_area_body_entered(body):
-	scored.emit()
+	hit.emit()

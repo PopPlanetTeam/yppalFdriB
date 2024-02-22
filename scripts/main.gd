@@ -51,7 +51,6 @@ func start_game():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
 	if game_running:
 		scroll += SCROLL_SPEED
 		if scroll >= screen_size.x:

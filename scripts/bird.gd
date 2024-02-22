@@ -19,10 +19,10 @@ func reset():
 	
 func _physics_process(delta):
 	if flying or falling:
-		velocity.y += G * delta
+		velocity.y -= G * delta
 		
-		if velocity.y > MAX_VEL:
-			velocity.y = MAX_VEL
+		if velocity.y < -MAX_VEL:
+			velocity.y = -MAX_VEL
 		if flying:
 			set_rotation(deg_to_rad(velocity.y * 0.05))
 			$animation_sprite.play()
@@ -36,4 +36,4 @@ func _physics_process(delta):
 	#	$animation_sprite.play("flying")
 
 func flap():
-	velocity.y = FLAP_SPEED
+	velocity.y = -FLAP_SPEED
