@@ -1,25 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8s2byx3r8en4"]
+[gd_scene load_steps=8 format=3 uid="uid://c8s2byx3r8en4"]
 
 [ext_resource type="Texture2D" uid="uid://fkrr762pkwhe" path="res://assets/bg.png" id="1_7ta7r"]
-[ext_resource type="Texture2D" uid="uid://bbob6bruvxeak" path="res://assets/ground.png" id="1_cjakw"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_678bu"]
-size = Vector2(1729.5, 171)
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_a5jc4"]
+[ext_resource type="PackedScene" uid="uid://da1yxrcrqvitx" path="res://scenes/pipe.tscn" id="2_lt2ff"]
+[ext_resource type="PackedScene" uid="uid://cghigjmsx3wko" path="res://scenes/bird.tscn" id="4_2rus8"]
+[ext_resource type="PackedScene" uid="uid://u1xs5kwga4g1" path="res://scenes/ground.tscn" id="4_dlcwj"]
+[ext_resource type="PackedScene" uid="uid://dhyx2j4aoo2op" path="res://scenes/game_over.tscn" id="6_0s4f2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p4go8"]
 size = Vector2(1079, 52)
 
 [node name="main" type="Node2D"]
-
-[node name="ground" type="Area2D" parent="."]
-
-[node name="ground" type="Sprite2D" parent="ground"]
-position = Vector2(523, 684)
-texture = ExtResource("1_cjakw")
-
-[node name="ground_collision" type="CollisionShape2D" parent="ground"]
-position = Vector2(521, 686)
-shape = SubResource("RectangleShape2D_678bu")
+script = ExtResource("1_a5jc4")
+pipe_scene = ExtResource("2_lt2ff")
 
 [node name="background" type="Sprite2D" parent="."]
 position = Vector2(433.5, 301)
@@ -31,3 +24,25 @@ texture = ExtResource("1_7ta7r")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ceil"]
 position = Vector2(454.5, -26)
 shape = SubResource("RectangleShape2D_p4go8")
+
+[node name="bird" parent="." instance=ExtResource("4_2rus8")]
+position = Vector2(408, 343)
+
+[node name="ground" parent="." instance=ExtResource("4_dlcwj")]
+
+[node name="pipe_timer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="score_label" type="Label" parent="."]
+offset_left = 1.0
+offset_top = 29.0
+offset_right = 866.0
+offset_bottom = 52.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="game_over" parent="." instance=ExtResource("6_0s4f2")]
+
+[connection signal="hit" from="ground" to="." method="_on_ground_hit"]
+[connection signal="timeout" from="pipe_timer" to="." method="_on_pipe_timer_timeout"]
+[connection signal="restart" from="game_over" to="." method="_on_game_over_restart"]

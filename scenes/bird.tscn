@@ -17,9 +17,9 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_auvsl")
 }],
-"loop": true,
+"loop": false,
 "name": &"flying",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_apcs1"]
@@ -32,6 +32,8 @@ script = ExtResource("1_c2jv6")
 [node name="animation_sprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tihkw")
 animation = &"flying"
+frame = 2
+frame_progress = 1.0
 
 [node name="colision" type="CollisionShape2D" parent="."]
 rotation = 1.5708
